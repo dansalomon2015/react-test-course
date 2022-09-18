@@ -32,7 +32,7 @@ const searchQuery = (
         });
 };
 
-const debouncer = lodash.throttle(searchQuery);
+const debouncer = lodash.debounce(searchQuery);
 const search = debouncer;
 
 const useSearch = ({ queryParam }: Props) => {
@@ -41,14 +41,14 @@ const useSearch = ({ queryParam }: Props) => {
 
     useEffect(() => {
         if (!queryParam) {
+            search.cancel();
             setLoading(false);
             setResult([]);
-            search.cancel();
         } else {
             setLoading(true);
             search(queryParam.trim(), setResult, setLoading);
         }
-    }, [queryParam, search]);
+    }, [queryParam]);
 
     return {
         result,
@@ -59,7 +59,7 @@ const useSearch = ({ queryParam }: Props) => {
 const Login = () => {
     // const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
-    const { result, loading } = useSearch({ queryParam: searchText });
+    const { result } = useSearch({ queryParam: searchText });
 
     // const onSearch = (text: string) => {
     //     const search = debouncer;
