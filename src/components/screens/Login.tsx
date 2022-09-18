@@ -32,7 +32,7 @@ const useSearchHook = ({ queryParam }: Props) => {
         axios
             .get(API_URL, { params: { q: queryParam } })
             .then((response: AxiosResponse<{ totalItems: number; items: any[] }, any>) => {
-                const { totalItems, items } = response.data;
+                const { items } = response.data;
                 setLoading(false);
                 setResults(items ? items : []);
             });
