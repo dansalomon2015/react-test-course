@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Login from "./components/screens/Login";
 
 function App() {
     const a = 2;
@@ -25,6 +26,8 @@ function App() {
 
                 <h1 data-testid="mytestid">Hello</h1>
                 <span title="sum">{a + b}</span>
+
+                <Login />
             </header>
         </div>
     );
