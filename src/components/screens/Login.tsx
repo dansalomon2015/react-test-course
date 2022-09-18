@@ -35,7 +35,7 @@ const searchQuery = (
 const debouncer = lodash.throttle(searchQuery);
 const search = debouncer;
 
-const useSearchHook = ({ queryParam }: Props) => {
+const useSearch = ({ queryParam }: Props) => {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any[]>([]);
 
@@ -59,7 +59,7 @@ const useSearchHook = ({ queryParam }: Props) => {
 const Login = () => {
     // const [loading, setLoading] = useState(false);
     const [searchText, setSearchText] = useState("");
-    const { result, loading } = useSearchHook({ queryParam: searchText });
+    const { result, loading } = useSearch({ queryParam: searchText });
 
     // const onSearch = (text: string) => {
     //     const search = debouncer;
