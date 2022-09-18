@@ -51,7 +51,7 @@ const useSearchHook = ({ queryParam }: Props) => {
             setLoading(true);
             search(queryParam.trim(), setResult, setLoading);
         }
-    }, [queryParam]);
+    }, [queryParam, search]);
 
     return {
         result,
