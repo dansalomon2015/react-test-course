@@ -18,28 +18,26 @@ const API_URL = "https://www.googleapis.com/books/v1/volumes";
 interface Props {
     queryParam: string;
 }
+const searchQuery = (
+    queryParam: string,
+    setResults: (result: any[]) => void,
+    setLoading: (loading: boolean) => void
+) => {
+    axios
+        .get(API_URL, { params: { q: queryParam } })
+        .then((response: AxiosResponse<{ totalItems: number; items: any[] }, any>) => {
+            const { items } = response.data;
+            setLoading(false);
+            setResults(items ? items : []);
+        });
+};
+
+const debouncer = lodash.throttle(searchQuery);
+const search = debouncer;
 
 const useSearchHook = ({ queryParam }: Props) => {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any[]>([]);
-
-    const searchQuery = (
-        queryParam: string,
-        setResults: (result: any[]) => void,
-        setLoading: (loading: boolean) => void
-    ) => {
-        axios
-            .get(API_URL, { params: { q: queryParam } })
-            .then((response: AxiosResponse<{ totalItems: number; items: any[] }, any>) => {
-                const { items } = response.data;
-                setLoading(false);
-                setResults(items ? items : []);
-            });
-    };
-
-    const debouncer = lodash.throttle(searchQuery);
-
-    const search = debouncer;
 
     useEffect(() => {
         if (!queryParam) {
