@@ -76,12 +76,9 @@ const Login = () => {
     //     }
     // };
 
-    const otherSearch = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => {
-            console.log(event.target.value);
-        },
-        [searchText]
-    );
+    const otherSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value);
+    }, []);
 
     return (
         <div className="container">
