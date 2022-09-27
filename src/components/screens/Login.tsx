@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
+import { useParams } from "react-router-dom";
 import lodash from "lodash";
 
 const API_URL = "https://www.googleapis.com/books/v1/volumes";
-
 // let searchQuery = (queryParam: string, setResults: (result: any[]) => void, setLoading: (loading: boolean) => void) => {
 //     axios
 //         .get(API_URL, { params: { q: queryParam } })
@@ -18,6 +18,7 @@ const API_URL = "https://www.googleapis.com/books/v1/volumes";
 interface Props {
     queryParam: string;
 }
+
 const searchQuery = (
     queryParam: string,
     setResults: (result: any[]) => void,
@@ -61,6 +62,8 @@ const Login = () => {
     const [searchText, setSearchText] = useState("");
     const { result } = useSearch({ queryParam: searchText });
 
+    const { who } = useParams();
+
     // const onSearch = (text: string) => {
     //     const search = debouncer;
     //     if (!text) {
@@ -72,6 +75,13 @@ const Login = () => {
     //         search(text.trim(), setResult, setLoading);
     //     }
     // };
+
+    const otherSearch = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => {
+            console.log(event.target.value);
+        },
+        [searchText]
+    );
 
     return (
         <div className="container">
@@ -86,6 +96,8 @@ const Login = () => {
                     );
                 })}
             </form>
+            <input onChange={otherSearch} />
+            <span>{who}</span>
         </div>
     );
 };
