@@ -20,6 +20,7 @@ function App() {
                     href="https://reactjs.org"
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-cy="test"
                 >
                     Learn testing
                 </a>
